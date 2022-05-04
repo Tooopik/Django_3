@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,19 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'nowy.css' %}">
 </head>
 
 <body>
-    <h2>To beda moje filmy</h2>
+    <a href="{% url 'nowy' %}">Dodaj film</a>
+    {% if filmy|length == 0 %}
+    <h2>Brak filmów</h2>
+    {% else %}
+    <h2>Ilość filmów w BD: {{filmy|length}}</h2>
+    {% endif %}
+
 
     <h3>{{ text }}</h3>
     {% for film in filmy %}
-    <p>{{film}}</p>
+    <h3>{{film}}</h3>
+    <p>{{film.opis}}</p>
+    <a href="{% url 'edytuj_film' film.id %}">Edytuj</a>
+    <a href="{% url 'usun' film.id %}">Usun</a>
     {% endfor %}
 
-    {% for film in wszystkie %}
-    <p>{{film}}</p>
-    {% endfor %}
+
 
 </body>
 
