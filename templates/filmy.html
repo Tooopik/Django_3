@@ -1,42 +1,46 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'glowny.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'nowy.css' %}">
-</head>
+{% block tytul %} Lista filmów {% endblock %}
 
-<body>
-    {% if user.is_authenticated %}
-    Witaj {{ user.username }}<br>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-    <hr>
+{% block strona %}
+{% if user.is_authenticated %}
+Witaj {{ user.username }}<br>
+<a href="{% url 'logout' %}" class=" btn btn-danger">Logout</a>
+{% else %}
+<a href="{% url 'login' %}" class=" btn btn-success">Login</a>
+{% endif %}
+<hr>
 
-    <a href="{% url 'nowy' %}">Dodaj film</a>
-    {% if filmy|length == 0 %}
-    <h2>Brak filmów</h2>
-    {% else %}
-    <h2>Ilość filmów w BD: {{filmy|length}}</h2>
-    {% endif %}
+<a href="{% url 'nowy' %}" class=" btn btn-info">Dodaj film</a>
+{% if filmy|length == 0 %}
+<h2>Brak filmów</h2>
+{% else %}
+<!-- <h2>Ilość filmów w BD: {{filmy|length}}</h2> -->
+{% endif %}
 
 
-    <h3>{{ text }}</h3>
-    {% for film in filmy %}
-    <h3>{{film}}</h3>
-    <p>{{film.opis}}</p>
-    <a href="{% url 'edytuj_film' film.id %}">Edytuj</a>
-    <a href="{% url 'usun' film.id %}">Usun</a>
-    {% endfor %}
+<h3>{{ text }}</h3>
+{% for film in filmy %}
+<div class="card" style="width: 30rem;">
+    <img src="Avatar.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-7">
+                <h5 class="card-title">{{film}}</h5>
+            </div>
+            <div class="col-5">
+                <a href="{% url 'edytuj_film' film.id %}" class="btn btn-primary">Edytuj</a>
+                <a href="{% url 'usun' film.id %}" class="btn btn-primary">Usun</a>
+            </div>
+        </div>
+        <div class="row">
+            <p class="card-text">{{film.opis}}</p>
+        </div>
+    </div>
 
 
+</div>
+</div>
 
-</body>
-
-</html>
+{% endfor %}
+{% endblock %}

@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'glowny.html' %}
+{% load bootstrap %}
+{% block tytul %} Login {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block strona %}
 
-<body>
-    <form method="post">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">Zaloguj</button>
-        <hr>
-        <a href="{% url 'wszystkie' %}">Cofnij</a>
-    </form>
-</body>
-
-</html>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Zaloguj się</h5>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <button type="submit" class="btn btn-secondary">Zaloguj</button>
+            <a href="{% url 'wszystkie' %}" class="btn btn-primary">Cofnij</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

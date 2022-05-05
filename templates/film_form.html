@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'glowny.html' %}
+{% load bootstrap %}
+{% block tytul %} Film form {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Dodaj film</button>
-    </form>
-    <a href="{% url 'wszystkie' %}">Cofnij</a>
-</body>
-
-</html>
+{% block strona %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <button type="submit">Dodaj film</button>
+</form>
+<a href="{% url 'wszystkie' %}">Cofnij</a>
+{% endblock %}
