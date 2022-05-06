@@ -21,14 +21,15 @@ Witaj {{ user.username }}<br>
 
 <h3>{{ text }}</h3>
 {% for film in filmy %}
-<div class="card" style="width: 30rem;">
-    <img src="Avatar.jpg" class="card-img-top" alt="...">
+<div class="card">
+
     <div class="card-body">
+        <img src="/media/{{film.plakat}}" class="film-plakat">
         <div class="row">
             <div class="col-7">
-                <h5 class="card-title">{{film}}</h5>
+                <h5 class="card-title">{{film}} </h5>
             </div>
-            <div class="col-5">
+            <div class="col">
                 <a href="{% url 'edytuj_film' film.id %}" class="btn btn-primary">Edytuj</a>
                 <a href="{% url 'usun' film.id %}" class="btn btn-primary">Usun</a>
             </div>
